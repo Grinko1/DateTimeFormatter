@@ -13,8 +13,8 @@ public class Main {
     }
     private static <T> Map<T,Integer> countOfEl(T[] array){
         Map<T,Integer> map = new HashMap<>();
-        for (T num: array) {
-            map.merge(num, 1, Integer::sum);
+        for (T el: array) {
+            map.merge(el, 1, Integer::sum);
         }
         return map;
     }
