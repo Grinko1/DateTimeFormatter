@@ -13,9 +13,12 @@ public class ConcurrentBank {
         return newAccount;
     }
     public void transfer(BankAccount from, BankAccount to, int amount){
-        from.getLock().lock();
+        BankAccount firstLock = from.getId().compareTo(to.getId()) < 0 ? from : to;
+        BankAccount secondLock = firstLock == from ? to : from;
+
+        firstLock.getLock().lock();
         try {
-            to.getLock().lock();
+            secondLock.getLock().lock();
             try {
                 from.withdraw(BigDecimal.valueOf(amount));
                 to.deposit(BigDecimal.valueOf(amount));
@@ -23,10 +26,10 @@ public class ConcurrentBank {
             } catch (Exception e) {
                 System.out.println("Transfer failed: " + e.getMessage());
             } finally {
-                to.getLock().unlock();
+                secondLock.getLock().unlock();
             }
         } finally {
-            from.getLock().unlock();
+            firstLock.getLock().unlock();
         }
 
     }

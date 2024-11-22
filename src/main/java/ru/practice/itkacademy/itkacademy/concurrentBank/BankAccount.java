@@ -26,8 +26,6 @@ public class BankAccount {
         } finally {
             lock.unlock();
         }
-
-
     }
 
     public void withdraw(BigDecimal amount) throws Exception {
@@ -40,7 +38,5 @@ public class BankAccount {
         } finally {
             lock.unlock();
         }
-
-
     }
 }
