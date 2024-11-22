@@ -1,7 +1,10 @@
 package ru.practice.itkacademy.itkacademy.concuretBlockingQueue;
 
+import java.util.Arrays;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 
 public class Main {
@@ -9,6 +12,7 @@ public class Main {
 
     ExecutorService poolProducer = Executors.newFixedThreadPool(7);
     ExecutorService poolConsumer = Executors.newFixedThreadPool(7);
+
 
         try {
         BlockingQueue<Integer> queue = new BlockingQueue<>(5);
